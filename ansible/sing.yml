@@ -7,5 +7,6 @@
   # - nginx
   # - php-fpm-55
   # - nginx-conf
-  - firewalld
+  # - firewalld
   # - youtrack
+  # - varnish

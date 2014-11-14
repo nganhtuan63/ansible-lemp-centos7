@@ -8,4 +8,5 @@
   # - php-fpm-55
   # - sample
   # - nginx-conf
-  - youtrack
+  # - youtrack
+  # - varnish
