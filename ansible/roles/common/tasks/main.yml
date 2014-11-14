@@ -1,0 +1,22 @@
+---
+- name: Install Epel repository
+  command: rpm -Uivh --replacepkgs {{epel_repository}}
+
+- name: Install Remi repository
+  command: rpm -Uivh --replacepkgs {{remi_repository}}
+
+- name: Install libselinux-python
+  yum: name=libselinux-python state=present
+
+- name: Install wget
+  yum: name=wget state=present
+
+- name: Install gcc
+  yum: name=gcc state=present
+
+- name: Install Git
+  yum: name=git state=present
+
+- name: Change SELinux Policy Mode
+  command: setenforce permissive
+  ignore_errors: True

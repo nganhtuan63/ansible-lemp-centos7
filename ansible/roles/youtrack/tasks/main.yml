@@ -1,0 +1,46 @@
+---
+- name: Add youtrack user
+  command: adduser youtrack
+  ignore_errors: True
+
+- name: create youtrack dir
+  command: mkdir -p /usr/local/youtrack/
+
+- command: chown youtrack:youtrack /usr/local/youtrack
+
+- name: create init script
+  copy: src=init dest=/etc/init.d/youtrack owner=youtrack group=youtrack
+
+- name: Set excute permission
+  command: chmod +x /etc/init.d/youtrack
+
+- name: Install jdk
+  yum: name=java-1.7.0-openjdk state=present
+
+- name: Init youtrack.sh
+  copy: src=youtrack.sh dest=/usr/local/youtrack/youtrack.sh owner=youtrack group=youtrack
+
+- name: Set excute permission
+  command: chmod +x /usr/local/youtrack/youtrack.sh
+
+- stat: path=/usr/local/youtrack/{{youtrack_version}}.jar
+  register: youtrack_jar
+
+- command: wget -P /usr/local/youtrack/ {{youtrack_download_url}}
+  when: youtrack_jar.stat.exists == false
+
+- name: Set excute permission
+  command: chmod +x /usr/local/youtrack/{{youtrack_version}}.jar
+
+- name: Start youtrack
+  command: /etc/init.d/youtrack restart
+
+- name: Config nginx
+  template: mode=0644 src=youtrack.conf.j2 dest=/etc/nginx/conf.d/{{youtrack_domain}}.conf 
+
+- name: Reload nginx
+  command: systemctl reload nginx.service
+
+
+
+

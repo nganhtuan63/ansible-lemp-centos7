@@ -1,0 +1,43 @@
+---
+- name: Install Percona Repository
+  yum: name={{ percona_repository }}
+
+- name: Install Percona Database
+  yum: name={{ item }} state=present
+  with_items:
+  - Percona-Server-shared-55
+  - Percona-Server-server-55
+  - Percona-Server-client-55
+  # - Percona-Server-devel-55
+  - MySQL-python
+
+- name: Load default Mysql configuration file
+  template: src=my.cnf.j2 dest=/etc/my.cnf
+
+- name: Automatic load when boot
+  command: systemctl enable mysqld.service
+
+- name: Be sure mysqld is running and enable
+  service: name=mysqld state=running enabled=true
+
+- name: Update mysql root password
+  mysql_user: name=root host={{ item }} password={{root_db_password}} 
+  ignore_errors: True
+  with_items:   
+   - 127.0.0.1
+   - ::1
+   - localhost
+  notify:
+   - Restart mysqld.service
+
+- name: Remove anonymous users
+  mysql_user: name='' host={{ item }} login_user={{root_db_user}} login_password={{root_db_password}} state=absent
+  with_items:   
+   - 127.0.0.1
+   - ::1
+   - localhost  
+
+- name: Remove the test database
+  mysql_db: name=test login_user={{root_db_user}} login_password={{root_db_password}} state=absent
+  notify:
+   - Restart mysqld.service

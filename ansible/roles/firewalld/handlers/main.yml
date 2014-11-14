@@ -1,0 +1,6 @@
+---
+- name: restart firewalld.service
+  command: systemctl restart firewalld.service
+
+- name: reload firewalld.service
+  command: firewall-cmd --reload

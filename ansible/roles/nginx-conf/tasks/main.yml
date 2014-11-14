@@ -1,0 +1,12 @@
+---
+- name: Copy default configuration
+  template: src=default.conf.j2 dest=/etc/nginx/conf.d/{{conf_name}}.conf mode=0644
+  notify: Restart nginx.service
+
+# fix bugs related with SELinux
+# keywords: Why does Nginx return a 403 even though all permissions are set properly?
+# http://stackoverflow.com/questions/22586166/why-does-nginx-return-a-403-even-though-all-permissions-are-set-properly
+# check: ls -dZ /srv/www
+# - name: Fix bugs related with SELinux
+#   command: setenforce permissive
+#   command: chcon -Rt httpd_sys_content_t {{conf_root_path}}

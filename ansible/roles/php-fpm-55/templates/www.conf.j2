@@ -1,0 +1,24 @@
+[www]
+listen = /var/run/php-fpm/www.sock
+listen.owner = nginx
+listen.group = nginx
+listen.mode = 0660
+user = nginx
+group = nginx
+slowlog = /var/log/php-fpm/slowlog.log
+pm = dynamic
+pm.max_children = 80
+pm.start_servers = 10
+pm.min_spare_servers = 10
+pm.max_spare_servers = 80
+pm.max_requests = 500
+listen.backlog = -1
+pm.status_path = /status
+request_terminate_timeout = 30s
+catch_workers_output = yes
+#rlimit_files = 131072
+#rlimit_core = unlimited
+env[HOSTNAME] = $HOSTNAME
+env[TMP] = /tmp
+env[TMPDIR] = /tmp
+env[TEMP] = /tmp

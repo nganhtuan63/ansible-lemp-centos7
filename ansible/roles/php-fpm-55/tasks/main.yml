@@ -1,0 +1,44 @@
+---
+- name: Install php-fpm-55 
+  yum: name={{ item }} state=latest enablerepo=remi,remi-php55
+  with_items:    
+    - php-fpm
+    - php-common
+    - php-devel
+    - php-cli
+    - php-pdo
+    - php-gd
+    - php-xml
+    - php-mbstring
+    - php-mcrypt
+    - php-mysql
+    - php-igbinary
+    - php-bcmath
+    - php-opcache
+
+- name: Create Folder for Session
+  file: path=/var/lib/php/session state=directory owner=nginx group=nobody mode=770
+
+- name: Create Folder for WDSL
+  file: path=/var/lib/php/wsdlcache state=directory owner=nginx group=nobody mode=770
+
+- name: Copy error.log file
+  copy: src=error.log dest=/var/log/php-fpm/error.log owner=nginx group=nginx mode=770
+
+- name: Copy slow.log file
+  copy: src=slow.log dest=/var/log/php-fpm/slow.log owner=nginx group=nginx mode=770
+
+- name: Config php.ini file
+  template: src=php.ini.j2 dest=/etc/php.ini mode=0644
+
+- name: Config php-fpm file
+  template: src=php-fpm.conf.j2 dest=/etc/php-fpm.conf mode=0644
+
+- name: Copy www.conf file
+  template: src=www.conf.j2 dest=/etc/php-fpm.d/www.conf mode=0644
+
+- name: Automatic load when boot
+  command: systemctl enable php-fpm.service
+
+- name: Be sure php-fpm is running and enable
+  service: name=php-fpm state=running enabled=true

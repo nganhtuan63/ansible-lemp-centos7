@@ -1,0 +1,31 @@
+---
+- name: Install Nginx Repository
+  command: rpm -Uivh --replacepkgs {{nginx_repository}}
+
+- name: Install Nginx
+  yum: name=nginx state=latest
+
+- name: Automatic load when boot
+  command: systemctl enable nginx.service
+
+# - name: Copy Nginx Main configuration
+#   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf mode=0644
+
+# - name: Copy Nginx Options configuration
+#   template: src=options.conf.j2 dest=/etc/nginx/options.conf mode=0644
+
+# - name: Copy www default configuration
+#   template: src=default.conf.j2 dest=/etc/nginx/conf.d/default.conf mode=0644
+
+- name: Be sure nginx is running and enable
+  service: name=nginx state=running enabled=true
+
+- name: Be sure firewalld is running and enable
+  service: name=firewalld state=running enabled=true
+
+- name: Change filter on firewalld.service
+  command: firewall-cmd --permanent --zone=public --add-service=http
+  command: firewall-cmd --permanent --zone=public --add-service=https
+
+- name: Restart firewalld
+  command: systemctl restart firewalld.service

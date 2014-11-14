@@ -1,0 +1,8 @@
+---
+conf_name: gxc
+conf_domain: gxcapp.com
+conf_port: 80
+# don't include / in end of path
+conf_root_path: /var/www/html
+conf_access_log: /var/log/nginx/gxc_access.log main buffer=16k
+conf_client_max_body_size: 5M

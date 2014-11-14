@@ -1,0 +1,10 @@
+---
+# - name: Check php info
+#   copy: src=info.php dest=/srv/www/index.php owner=nginx group=nginx mode=770
+- name: Stop mysql
+  service: name=mysql state=stopped
+
+- name: sample
+  command: echo "a"
+  notify: 
+  - check mysql

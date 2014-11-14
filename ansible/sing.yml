@@ -1,0 +1,11 @@
+---
+- hosts: sing
+  sudo: yes
+  roles:
+  # - common
+  # - percona
+  # - nginx
+  # - php-fpm-55
+  # - nginx-conf
+  - firewalld
+  # - youtrack
