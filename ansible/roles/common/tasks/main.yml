@@ -8,6 +8,10 @@
 - name: Install libselinux-python
   yum: name=libselinux-python state=present
 
+- name: Change SELinux Policy Mode
+  command: setenforce permissive
+  ignore_errors: True
+
 - name: Install wget
   yum: name=wget state=present
 
@@ -17,6 +21,5 @@
 - name: Install Git
   yum: name=git state=present
 
-- name: Change SELinux Policy Mode
-  command: setenforce permissive
-  ignore_errors: True
+- name: Install VIM
+  yum: name=vim state=present
