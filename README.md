@@ -16,7 +16,9 @@ Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP
 	(uploading to my db - update later)
 
 3. Check out this git
+```
 	git clone git@github.com:gxcsoft/ansible-lemp-centos7.git
+```
 
 4. Local vagrant developement machine
 	- Move to check out folder
@@ -27,7 +29,8 @@ Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP
 
 5. Production server
 	- Move to check_out_folder/ansible
-	- Create your_server_role_config.yml. Example:
+	- Create your_server_role_config.yml. Here is an example:
+	```
 		---
 		- hosts: host_config_name
 		  sudo: yes
@@ -37,13 +40,18 @@ Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP
 		  - nginx
 		  - php-fpm-55
 		  - nginx-conf
+	```
 
-	- Add server ip address in to hosts:
+	- Add server ip address in to hosts. Here is an example:
+	```
 		[host_config_name]
-		128.199.179.75
+		128.199.179.xx
+	```
 
 	- Type this command to run ansible (ansible must be installed)
+	```
 		ansible-playbook -i ./hosts -u your_server_ssh_account your_server_role_config.yml
+	```
 
 Any questions? Please create new issue or send me an email <tung@gxccms.com>
 
