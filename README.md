@@ -10,16 +10,15 @@ Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP
 2. Get Centos 7 Box
 	- You can create clean - fresh your centos 7 base box.
 	This is my guide: 
-	https://docs.google.com/document/d/1MXsEFN6GFrRGJqcIsuTJAXqLXaHFPcx7Np_6WnZzBo8/edit?usp=sharing
+	https://docs.google.com/document/d/1MXsEFN6GFrRGJqcIsuTJAXqLXaHFPcx7Np_6WnZzBo8/view?usp=sharing
 
 	- You can download my clear - fresh centos 7 base box:
-	(uploading to my db - update later)
+	https://drive.google.com/file/d/0B03Th23o5fswV3ZNWEFSNTRHdkk/view?usp=sharing
 
 3. Check out this git
 ```
 	git clone git@github.com:gxcsoft/ansible-lemp-centos7.git
 ```
-
 4. Local vagrant developement machine
 	- Move to check out folder
 	- vagrant box add gxc your_centos_7_box_location
@@ -53,5 +52,5 @@ Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP
 		ansible-playbook -i ./hosts -u your_server_ssh_account your_server_role_config.yml
 	```
 
-Any questions? Please create new issue or send me an email <tung@gxccms.com>
+Any questions? Please add new issue or send me an email <tung@gxccms.com>
 
