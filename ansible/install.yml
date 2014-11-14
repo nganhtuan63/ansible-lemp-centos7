@@ -2,10 +2,10 @@
 - hosts: gxc
   sudo: yes
   roles:
-  # - common
-  # - percona
-  # - nginx
-  # - php-fpm-55
+  - common
+  - percona
+  - nginx
+  - php-fpm-55
   # - sample
   # - nginx-conf
   # - youtrack

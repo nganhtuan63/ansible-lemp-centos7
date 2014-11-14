@@ -15,8 +15,11 @@ Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP
 	- You can download my clear - fresh centos 7 base box:
 	https://drive.google.com/file/d/0B03Th23o5fswV3ZNWEFSNTRHdkk/view?usp=sharing
 
-- Check out this git
-	Type this command:
+	- Default installed account:
+		- root/gxccms.com
+		- vagrant/gxccms.com
+
+- Check out this git. Type this command:
 	```
 		git clone git@github.com:gxcsoft/ansible-lemp-centos7.git
 	```
@@ -54,5 +57,5 @@ Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP
 		ansible-playbook -i ./hosts -u your_server_ssh_account your_server_role_config.yml
 	```
 
-Any questions? Please add new issue or send me an email <tung@gxccms.com>
+- Any questions? Please add new issue or send me an email <tung@gxccms.com>
 
