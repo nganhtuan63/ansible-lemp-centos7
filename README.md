@@ -1,5 +1,5 @@
-ansible-lemp
-============
+ansible-lemp-centos7
+====================
 
 Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP-FPM 5
 
@@ -13,7 +13,7 @@ Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP
 	https://docs.google.com/document/d/1MXsEFN6GFrRGJqcIsuTJAXqLXaHFPcx7Np_6WnZzBo8/edit?usp=sharing
 
 	- You can download my clear - fresh centos 7 base box:
-	<uploading to my db - update later>
+	(uploading to my db - update later)
 
 3. Check out this git
 	git clone git@github.com:gxcsoft/ansible-lemp-centos7.git
@@ -41,7 +41,7 @@ Full webstack for PHP developing - LEMP - Centos 7, Nginx, Percona Database, PHP
 	- Add server ip address in to hosts:
 		[host_config_name]
 		128.199.179.75
-		
+
 	- Type this command to run ansible (ansible must be installed)
 		ansible-playbook -i ./hosts -u your_server_ssh_account your_server_role_config.yml
 
