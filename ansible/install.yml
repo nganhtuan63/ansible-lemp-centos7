@@ -6,6 +6,7 @@
   - percona
   - nginx
   - php-fpm-55
+  - firewalld
   # - sample
   # - nginx-conf
   # - youtrack
