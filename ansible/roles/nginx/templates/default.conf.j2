@@ -1,39 +1,38 @@
 server {
-        listen          80;
-        server_name     localhost;
-        root            /srv/www/;
-        index           index.php index.html;
-        access_log      /var/log/nginx/access.log main buffer=16k;
+    charset utf-8;
+    client_max_body_size 128M;
 
-        client_max_body_size 5M;
+    listen 80; ## listen for ipv4
+    #listen [::]:80 default_server ipv6only=on; ## listen for ipv6
 
-        location / {
-            index index.php;
-        }
+    server_name bgxc.com;
+    root        /srv/www/default;
+    index       index.php;
 
-        location ~ \.htaccess {
-            deny all;
-        }
+    access_log  /var/log/nginx/access.log main buffer=16k;
+    error_log   /var/log/nginx/error.log;
+
+    location / {
+        # Redirect everything that isn't a real file to index.php
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    # uncomment to avoid processing of calls to non-existing static files by Yii
+    #location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {
+    #    try_files $uri =404;
+    #}
+    #error_page 404 /404.html;
+
+    location ~ \.php$ {
         
-        location ~* \.(gif|jpg|jpeg|png|css|js)$ {
-            expires max;
-        }
- 
-        location ~ \.php$ {
-            try_files $uri =404;
-            fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_index index.php;
-            fastcgi_pass  unix:/var/run/php-fpm/www.sock;
-            fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            include       fastcgi_params;
-        }
-        
-        location ~ /\.ht {
-            deny  all;
-        }
+        fastcgi_pass   127.0.0.1:9000;        
+        try_files $uri =404;
+        include       fastcgi_params;
+        fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+        fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
+    }
 
-        location ~ /\.svn {
-            deny  all;
-        }
-
+    location ~ /\.(ht|svn|git) {
+        deny all;
+    }
 }
