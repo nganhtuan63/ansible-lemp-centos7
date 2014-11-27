@@ -23,3 +23,6 @@
 
 - name: Install VIM
   yum: name=vim state=present
+
+- name: Install Net tools
+  yum: name=net-tools state=present
